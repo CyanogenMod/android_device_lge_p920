@@ -6,15 +6,9 @@ $(call inherit-product, device/common/gps/gps_eu.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/p920/overlay
 
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/lge/p920/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/prebuilt/tiwlan_drv.ko:system/etc/wifi/tiwlan_drv.ko \
     $(LOCAL_PATH)/prebuilt/tiap_drv.ko:system/lib/modules/tiap_drv.ko
 
@@ -28,9 +22,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/setup-recovery:system/bin/setup-recovery \
     $(LOCAL_PATH)/prebuilt/enable-tiwlink:system/bin/enable-tiwlink \
-    $(LOCAL_PATH)/init.cosmo.rc:root/init.rc \
     $(LOCAL_PATH)/init.dummy.rc:root/init.p920.rc \
-    $(LOCAL_PATH)/ueventd.omap4430.rc:root/ueventd.omap4430.rc \
+    $(LOCAL_PATH)/init.cosmo.rc:root/init.rc \
+    $(LOCAL_PATH)/init.p920.usb.rc:root/init.p920.usb.rc \
+    $(LOCAL_PATH)/ueventd.omap4430lgecosmopolitanboard.rc:root/ueventd.rc \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
 
 ## Wifi
@@ -40,7 +35,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
     $(LOCAL_PATH)/configs/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
     $(LOCAL_PATH)/configs/tiwlan.ini:system/etc/wifi/softap/tiwlan.ini \
-    $(LOCAL_PATH)/configs/tiwlan_ota.ini:system/etc/wifi/softap/tiwlan_ota.ini
+    $(LOCAL_PATH)/configs/tiwlan_ota.ini:system/etc/wifi/softap/tiwlan_ota.ini \
+    $(LOCAL_PATH)/configs/heaven_synaptics_touch.idc:system/usr/idc/heaven_synaptics_touch.idc \
+    $(LOCAL_PATH)/configs/heaven_synaptics_touch.kl:system/usr/keylayout/heaven_synaptics_touch.kl
 
 # RIL stuffs
 PRODUCT_COPY_FILES += \
@@ -70,11 +67,34 @@ PRODUCT_COPY_FILES += \
 
 ## GPS
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/libicuuc.so:system/lib/libicuuc.so \
     $(LOCAL_PATH)/configs/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
 ## Camera
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml
+
+## Audio prebuilts from gingerbread. These can't be built on an ICS tree, so
+## pull them from a CM7 build
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/audio/lib/liba2dp.so:system/lib/liba2dp.so \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \
+    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf
 
 $(call inherit-product, build/target/product/full.mk)
 
@@ -86,13 +106,14 @@ PRODUCT_PACKAGES += \
     tiap_loader \
     tiap_cu \
     gps.p920 \
-    acoustics.default \
+    audio.primary.p920 \
+    audio.a2dp.default \
     hwprops
 
 # OpenMAX IL configuration
-TI_OMX_POLICY_MANAGER := hardware/ti/omx/system/src/openmax_il/omx_policy_manager
+#TI_OMX_POLICY_MANAGER := hardware/ti/omx/system/src/openmax_il/omx_policy_manager
+    #$(TI_OMX_POLICY_MANAGER)/src/policytable.tbl:system/etc/policytable.tbl \#
 PRODUCT_COPY_FILES += \
-    $(TI_OMX_POLICY_MANAGER)/src/policytable.tbl:system/etc/policytable.tbl \
     $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
 
 # Graphics
@@ -100,23 +121,23 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_PACKAGES += \
 #    gfx-libs
 
-PRODUCT_PACKAGES += \
-    OMXCore \
-    libOMX_CoreOsal \
-    libOMX_Core \
-    libomx_rpc \
-    libomx_proxy_common \
-    libOMX.TI.DUCATI1.VIDEO.H264D \
-    libOMX.TI.DUCATI1.VIDEO.MPEG4D \
-    libOMX.TI.DUCATI1.VIDEO.VP6D \
-    libOMX.TI.DUCATI1.VIDEO.VP7D \
-    libOMX.TI.DUCATI1.VIDEO.H264E \
-    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
-    libOMX.TI.DUCATI1.IMAGE.JPEGD \
-    libOMX.TI.DUCATI1.VIDEO.CAMERA \
-    libOMX.TI.DUCATI1.MISC.SAMPLE \
-    libOMX.TI.DUCATI1.VIDEO.DECODER
-
+#PRODUCT_PACKAGES += \
+#    OMXCore \
+#    libOMX_CoreOsal \
+#    libOMX_Core \
+#    libomx_rpc \
+#    libomx_proxy_common \
+#    libOMX.TI.DUCATI1.VIDEO.H264D \
+#    libOMX.TI.DUCATI1.VIDEO.MPEG4D \
+#    libOMX.TI.DUCATI1.VIDEO.VP6D \
+#    libOMX.TI.DUCATI1.VIDEO.VP7D \
+#    libOMX.TI.DUCATI1.VIDEO.H264E \
+#    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
+#    libOMX.TI.DUCATI1.IMAGE.JPEGD \
+#    libOMX.TI.DUCATI1.VIDEO.CAMERA \
+#    libOMX.TI.DUCATI1.MISC.SAMPLE \
+#    libOMX.TI.DUCATI1.VIDEO.DECODER
+#
 # Tiler and Syslink
 PRODUCT_PACKAGES += \
     overlay.p920 \
@@ -170,6 +191,7 @@ PRODUCT_PACKAGES += \
     wifimac
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := p920
+PRODUCT_NAME := full_p920
 PRODUCT_DEVICE := p920
-PRODUCT_MODEL := LG Optimus 3D
+PRODUCT_MODEL := LG-P920
+PRODUCT_MANUFACTURER := LGE
