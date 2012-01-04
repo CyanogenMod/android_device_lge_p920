@@ -581,6 +581,7 @@ on post-fs
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
 on boot-pause
+    start adbd
     exec sbin/chargerlogo
 
 on boot
