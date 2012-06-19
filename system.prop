@@ -37,6 +37,7 @@ ro.com.google.clientidbase.am=android-lge
 omap.audio.mic.main=AMic0
 omap.audio.mic.sub=AMic1
 omap.audio.power=HQ
+modem.hand.voice.multimic=Yes
 alsa.mixer.playback.master=DAC2 Analog
 alsa.mixer.capture.master=Analog
 
