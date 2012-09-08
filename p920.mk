@@ -9,14 +9,17 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/p920/overlay
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/tiwlan_drv.ko:system/etc/wifi/tiwlan_drv.ko \
-    $(LOCAL_PATH)/prebuilt/tiap_drv.ko:system/lib/modules/tiap_drv.ko
+    $(LOCAL_PATH)/prebuilt/bluetooth.ko:system/lib/modules/bluetooth.ko \
+    $(LOCAL_PATH)/prebuilt/btwilink.ko:system/lib/modules/btwilink.ko \
+    $(LOCAL_PATH)/prebuilt/cfg80211.ko:system/lib/modules/cfg80211.ko \
+    $(LOCAL_PATH)/prebuilt/compat.ko:system/lib/modules/compat.ko \
+    $(LOCAL_PATH)/prebuilt/mac80211.ko:system/lib/modules/mac80211.ko \
+    $(LOCAL_PATH)/prebuilt/rfcomm.ko:system/lib/modules/rfcomm.ko \
+    $(LOCAL_PATH)/prebuilt/wl12xx.ko:system/lib/modules/wl12xx.ko \
+    $(LOCAL_PATH)/prebuilt/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    $(LOCAL_PATH)/prebuilt/fm_drv.ko:system/lib/modules/fm_drv.ko \
-    $(LOCAL_PATH)/prebuilt/fm_v4l2_drv.ko:system/lib/modules/fm_v4l2_drv.ko \
-    $(LOCAL_PATH)/prebuilt/btwilink.ko:system/lib/modules/btwilink.ko
+    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 ## Scripts and confs
 PRODUCT_COPY_FILES += \
@@ -31,11 +34,10 @@ PRODUCT_COPY_FILES += \
 ## Wifi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifimac/wlan-precheck:system/bin/wlan-precheck \
+    $(LOCAL_PATH)/wifimac/wifical.sh:system/bin/wifical.sh \
+    $(LOCAL_PATH)/configs/RFMD_S_3.5.ini:system/etc/wifi/RFMD_S_3.5.ini \
     $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/configs/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
-    $(LOCAL_PATH)/configs/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
-    $(LOCAL_PATH)/configs/tiwlan.ini:system/etc/wifi/softap/tiwlan.ini \
-    $(LOCAL_PATH)/configs/tiwlan_ota.ini:system/etc/wifi/softap/tiwlan_ota.ini \
     $(LOCAL_PATH)/configs/touch_dev.idc:system/usr/idc/touch_dev.idc \
     $(LOCAL_PATH)/configs/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
@@ -159,6 +161,7 @@ PRODUCT_PACKAGES += \
 
 ## To set the Wifi MAC address from NV, and the softap stuff
 PRODUCT_PACKAGES += \
+    calibrator \
     hostap \
     libhostapdcli \
     wifimac

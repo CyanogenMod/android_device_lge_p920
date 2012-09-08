@@ -115,3 +115,7 @@ vendor/bin/pvrsrvinit_SGX540_120
 bin/glgps
 bin/rild
 bin/pvrsrvinit
+etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin
+etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin
+etc/firmware/ti-connectivity/wl1271-nvs.bin
+etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin

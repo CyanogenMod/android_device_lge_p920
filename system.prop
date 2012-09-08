@@ -6,7 +6,7 @@
 com.ti.omap_enhancement=true
 
 ## Wifi interface name
-wifi.interface=tiwlan0
+wifi.interface=wlan0
 
 # hold precise GC data, and use SMP
 dalvik.vm.dexopt-flags=m=y,u=n

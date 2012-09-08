@@ -21,6 +21,8 @@
 
 /* Read device NVRAM and set the Wifi MAC address accordingly */
 
+// at /data/misc/wifi
+// wifical.sh -c /system/etc/wifi/RFMD_S_3.5.ini /data/misc/wifi/wl1271-nvs.bin -m ba:dc:0f:ee:f0:da
 static int macmap[6][2] = { { 2, 11 }, { 3, 10 }, { 4, 6 }, { 5, 5 }, 
 	   			{ 6, 4 }, { 7, 3 }};
 
@@ -30,7 +32,7 @@ int main() {
 	int i;
 
 	fd1 = open("/dev/block/mmcblk0p3",O_RDONLY);
-	fd2 = open("/data/misc/wifi/nvs_map.bin",O_WRONLY);
+	fd2 = open("/data/misc/wifi/wl1271-nvs.bin",O_WRONLY);
 
 	for (i = 0; i<6; i++) {
 		lseek(fd1,macmap[i][0],SEEK_SET);

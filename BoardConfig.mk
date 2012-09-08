@@ -27,12 +27,6 @@ TARGET_KERNEL_CONFIG := cyanogenmod_cosmo_defconfig
 # Keep this as a fallback
 TARGET_PREBUILT_KERNEL := device/lge/p920/kernel
 
-KERNEL_EXTERNAL_MODULES:
-	make -C hardware/ti/wlan/wl1283/platforms/os/linux/ KERNEL_DIR=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-" TNETW=1273 RANDOM_MAC=n REPORT_LOG=n
-	mv hardware/ti/wlan/wl1283/platforms/os/linux/tiwlan_drv.ko $(KERNEL_MODULES_OUT)
-	make -C hardware/ti/wlan/wl1283_softAP/platforms/os/linux/ KERNEL_DIR=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-" TNETW=1273 REPORT_LOG=n
-	mv hardware/ti/wlan/wl1283_softAP/platforms/os/linux/tiap_drv.ko $(KERNEL_MODULES_OUT)
-
 TARGET_KERNEL_MODULES := KERNEL_EXTERNAL_MODULES
 
 ## Ignore --wipe_data sent by the bootloader
@@ -58,17 +52,17 @@ BOARD_VOLD_MAX_PARTITIONS := 16
 
 TARGET_USES_GL_VENDOR_EXTENSIONS := false
 
-BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
-#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
-BOARD_WLAN_DEVICE           := wl1283
-BOARD_SOFTAP_DEVICE         := wl1283
-WPA_SUPPLICANT_VERSION      := VER_0_6_X
-HOSTAPD_VERSION             := VER_0_6_X
-WIFI_DRIVER_MODULE_PATH     := "/system/etc/wifi/tiwlan_drv.ko"
-WIFI_DRIVER_MODULE_NAME     := "tiwlan_drv"
-WIFI_FIRMWARE_LOADER        := "wlan_loader"
-BOARD_WEXT_NO_COMBO_SCAN	:= true
-BOARD_MOBILEDATA_INTERFACE_NAME := "vsnet0"
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
+BOARD_WLAN_DEVICE                := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+WIFI_FIRMWARE_LOADER             := ""
+COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
 OMAP_ENHANCEMENT := true
 

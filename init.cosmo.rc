@@ -429,6 +429,21 @@ on fs
     chmod 0770 /cache
     #mount ext3 /dev/block/mmcblk0p11 /lgdrm nosuid nodev noatime data=ordered
 
+#LGE_CHANGE_S, taewonee.kim@lge.com - TI wifi
+    insmod /system/lib/modules/compat.ko
+    insmod /system/lib/modules/cfg80211.ko
+    insmod /system/lib/modules/mac80211.ko
+    insmod /system/lib/modules/wl12xx.ko debug_level=0x63c00
+#LGE_CHANGE_E, taewonee.kim@lge.com - TI wifi
+
+#TIK_BlueTI
+#Bluetooth
+        insmod /system/lib/modules/bluetooth.ko force_acl_master=1 enable_mgmt=1 enable_le=1
+        insmod /system/lib/modules/rfcomm.ko
+        insmod /system/lib/modules/btwilink.ko
+#TIK_End
+
+
 on post-fs
 #LGE_CHANGE_S [taehwan.kim@lge.com] 2010-05-04, 27.8.2 patch., 27.10.1 patch
 # power management
@@ -746,7 +761,6 @@ on property:ro.kernel.qemu=1
 
 # Lazy way go get things done when /system(/build.prop) is up
 on property:ro.product.device=p920
-    start enable-tiwlink
     wait /sys/class/rfkill/rfkill0/type
     start uim
     wait /data/misc/wifi
@@ -875,41 +889,19 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
-service enable-tiwlink /system/bin/enable-tiwlink
+service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
-    disabled
-    oneshot
-
-service wlan_loader /system/bin/wlan_loader \
-    -f /system/etc/wifi/firmware.bin -i /system/etc/wifi/tiwlan.ini -e /data/misc/wifi/nvs_map.bin
-    class main
-     disabled
-     oneshot
-
-service wlan_ap_loader /system/bin/tiap_loader \
-    -i /system/etc/wifi/softap/tiwlan_ap.ini -f /system/etc/wifi/softap/firmware_ap.bin -e /data/misc/wifi/nvs_map.bin
-    class main
-    disabled
-    oneshot
-
-service ifcfg_ti /system/bin/ifconfig tiwlan0 up
-    disabled
-    class main
-    oneshot
-
-service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
-    class main
-    socket wpa_tiwlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi
     group system wifi inet
     disabled
     oneshot
 
-service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
 
-service iprenew_tiwlan0 /system/bin/dhcpcd -n tiwlan0
+service iprenew_wlan0 /system/bin/dhcpcd -n wlan0
     class main
     disabled
     oneshot
@@ -920,16 +912,6 @@ service hostapd /system/bin/hostap -dd /data/misc/wifi/hostapd.conf
     oneshot
 
 service wlan_precheck /system/bin/wlan-precheck
-    class main
-    disabled
-    oneshot
-
-service tiwlan_if_down /system/bin/ifconfig tiwlan0 down
-    class main
-    disabled
-    oneshot
-
-service ifcfg_tiap /system/bin/ifconfig tiap0 192.168.43.1 netmask 255.255.255.0 up
     class main
     disabled
     oneshot
