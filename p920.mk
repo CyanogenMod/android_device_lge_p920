@@ -36,14 +36,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
     $(LOCAL_PATH)/configs/tiwlan.ini:system/etc/wifi/softap/tiwlan.ini \
     $(LOCAL_PATH)/configs/tiwlan_ota.ini:system/etc/wifi/softap/tiwlan_ota.ini \
-    $(LOCAL_PATH)/configs/heaven_synaptics_touch.idc:system/usr/idc/heaven_synaptics_touch.idc \
-    $(LOCAL_PATH)/configs/heaven_synaptics_touch.kl:system/usr/keylayout/heaven_synaptics_touch.kl
+    $(LOCAL_PATH)/configs/touch_dev.idc:system/usr/idc/touch_dev.idc \
+    $(LOCAL_PATH)/configs/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
 # RIL stuffs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/rild:system/bin/rild \
     $(LOCAL_PATH)/configs/ipc_channels.config:system/etc/ipc_channels.config \
     $(LOCAL_PATH)/init.vsnet:system/bin/init.vsnet
+
+# SGX modules
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko \
+    $(LOCAL_PATH)/prebuilt/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko
 
 # Permission files
 PRODUCT_COPY_FILES += \
@@ -61,40 +65,13 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
-## Alsa configs
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf
-
 ## GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/libicuuc.so:system/lib/libicuuc.so \
     $(LOCAL_PATH)/configs/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
 ## Camera
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml
-
-## Audio prebuilts from gingerbread. These can't be built on an ICS tree, so
-## pull them from a CM7 build
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/audio/lib/liba2dp.so:system/lib/liba2dp.so \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \
-    $(LOCAL_PATH)/prebuilt/audio/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf
 
 $(call inherit-product, build/target/product/full.mk)
 
@@ -105,10 +82,8 @@ PRODUCT_PACKAGES += \
     wlan_cu \
     tiap_loader \
     tiap_cu \
-    gps.p920 \
-    audio.primary.p920 \
     audio.a2dp.default \
-    hwprops
+    audio_policy.default
 
 # OpenMAX IL configuration
 #TI_OMX_POLICY_MANAGER := hardware/ti/omx/system/src/openmax_il/omx_policy_manager
@@ -140,8 +115,6 @@ PRODUCT_COPY_FILES += \
 #
 # Tiler and Syslink
 PRODUCT_PACKAGES += \
-    overlay.p920 \
-    alsa.omap4 \
     libaudiomodemgeneric \
     libcamera \
     libtiutils \

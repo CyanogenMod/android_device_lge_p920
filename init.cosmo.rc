@@ -111,39 +111,27 @@ loglevel 3
     chown root radio /proc/cmdline
     chown system system /sys/devices/platform/i2c_omap.2/i2c-2/2-0020/gripsuppression
     chown system system /sys/devices/platform/i2c_omap.2/i2c-2/2-0020/handsuppression
-    chown system radio /sys/devices/platform/i2c_omap.2/i2c-2/2-0036/brightness
+    chown system radio /sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0036/brightness
     chown system system /sys/devices/platform/i2c_omap.2/i2c-2/2-0036/enable
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/atime
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/ptime
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/wtime
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/ppcount
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/pers
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/pilt
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/piht
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/GA
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/DF
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/pdata
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/interrupt
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/proxidata
-    chown system system /sys/devices/platform/i2c_omap.3/i2c-3/3-0039/luxdata
     chown system radio /sys/devices/platform/keypad_led/leds/keyboard-backlight/brightness
     chown system radio /sys/devices/platform/omap-keypad/key_test_mode
     chown system radio /sys/devices/platform/i2c_omap.4/i2c-4/4-0068/cal_onoff
     chown system radio /misc/cal.bin
 
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/atime
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/ptime
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/wtime
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/ppcount
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/pers
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/pilt
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/piht
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/GA
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/DF
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/pdata
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/interrupt
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/proxidata
-    chown system system /sys/devices/platform/i2c_omap.4/i2c-4/4-0039/luxdata
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/atime
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ptime
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/wtime
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ppcount
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pers
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pilt
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/piht
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/GA
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/DF
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pdata
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_als
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_prox
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/proxidata
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/luxdata
 
     chown system system /sys/devices/platform/omapdss/display0/enabled
     chown system system /sys/devices/platform/omapdss/display1/enabled
@@ -418,9 +406,6 @@ loglevel 3
     # flashlight
     chown system camera /sys/devices/platform/i2c_omap.2/i2c-2/2-0053/torch
     chmod 0660          /sys/devices/platform/i2c_omap.2/i2c-2/2-0053/torch
-
-on early-init
-    start hwprops
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
@@ -989,9 +974,4 @@ service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     class main
     user system
     group net_raw sdcard_rw system net_admin inet
-
-service hwprops /sbin/hwprops
-    class core
-    disabled
-    oneshot
 

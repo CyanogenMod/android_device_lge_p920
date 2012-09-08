@@ -17,8 +17,6 @@ ro.sf.lcd_density=240
 ro.telephony.call_ring.multiple=false
 ro.telephony.call_ring.delay=3000
 ro.telephony.call_ring.absent=true
-ro.telephony.ril_class=LGEStarRIL
-ro.telephony.ril.v3=facilitylock,datacall,signalstrength,icccardstatus,singlepdp
 rild.libpath=/system/lib/lge-ril.so
 mobiledata.interfaces=rmnet0
 
