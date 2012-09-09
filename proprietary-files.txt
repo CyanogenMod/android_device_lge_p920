@@ -29,7 +29,6 @@ lib/libPVRScopeServices.so
 lib/libcamera.so
 lib/libaudiomodemgeneric.so
 lib/libmmclient.so
-lib/libaudioutils.so
 lib/libIMGegl.so
 lib/libtinyalsa.so
 lib/libasound.so
