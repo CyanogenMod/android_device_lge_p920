@@ -916,19 +916,6 @@ service wlan_precheck /system/bin/wlan-precheck
     disabled
     oneshot
 
-service rawip_rmnet1 /system/bin/init.vsnet 1 up
-   user root
-   group radio cache inet misc net_admin net_raw
-   disabled
-   oneshot
-
-service rmnet1_down /system/bin/init.vsnet 1 down
-    class main
-   user root
-   group radio cache inet misc net_admin net_raw
-   disabled
-   oneshot
-
 # load IVA firmware
 #service baseimage /system/bin/syslink_daemon.out /system/base_image_sys_m3.xem3 /system/base_image_app_m3.xem3
 #    class core

@@ -43,8 +43,7 @@ PRODUCT_COPY_FILES += \
 
 # RIL stuffs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/ipc_channels.config:system/etc/ipc_channels.config \
-    $(LOCAL_PATH)/init.vsnet:system/bin/init.vsnet
+    $(LOCAL_PATH)/configs/ipc_channels.config:system/etc/ipc_channels.config
 
 # SGX modules
 PRODUCT_COPY_FILES += \
