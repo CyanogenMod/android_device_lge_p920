@@ -91,3 +91,6 @@ USE_OPENGL_RENDERER := true
 #BOARD_TOUCH_RECOVERY := true
 BOARD_CUSTOM_BOOTIMG_MK := device/lge/p920/uboot-bootimg.mk
 ENHANCED_DOMX := true
+
+TARGET_SPECIFIC_HEADER_PATH := device/lge/p920/include
+

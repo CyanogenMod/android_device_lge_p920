@@ -98,27 +98,18 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_PACKAGES += \
 #    gfx-libs
 
-#PRODUCT_PACKAGES += \
-#    OMXCore \
-#    libOMX_CoreOsal \
-#    libOMX_Core \
-#    libomx_rpc \
-#    libomx_proxy_common \
-#    libOMX.TI.DUCATI1.VIDEO.H264D \
-#    libOMX.TI.DUCATI1.VIDEO.MPEG4D \
-#    libOMX.TI.DUCATI1.VIDEO.VP6D \
-#    libOMX.TI.DUCATI1.VIDEO.VP7D \
-#    libOMX.TI.DUCATI1.VIDEO.H264E \
-#    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
-#    libOMX.TI.DUCATI1.IMAGE.JPEGD \
-#    libOMX.TI.DUCATI1.VIDEO.CAMERA \
-#    libOMX.TI.DUCATI1.MISC.SAMPLE \
-#    libOMX.TI.DUCATI1.VIDEO.DECODER
-#
-# Tiler and Syslink
 PRODUCT_PACKAGES += \
-    libaudiomodemgeneric \
-    libcamera \
+    OMXCore \
+    libOMX_Core \
+    libdomx \
+    libOMX.TI.DUCATI1.VIDEO.H264E \
+    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
+    libOMX.TI.DUCATI1.VIDEO.CAMERA \
+    libOMX.TI.DUCATI1.MISC.SAMPLE \
+    libOMX.TI.DUCATI1.VIDEO.DECODER.secure \
+    libOMX.TI.DUCATI1.VIDEO.DECODER
+#
+PRODUCT_PACKAGES += \
     libtiutils \
     libomxcameraadapter \
     libipcutils \

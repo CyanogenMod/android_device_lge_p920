@@ -122,3 +122,8 @@
 /dev/accelirq             0775   system     system
 /dev/timerirq             0775   system     system
 /dev/xmd-tty6           0660   system      system
+
+/dev/rproc_user           0660   media  media
+/dev/rpmsg-omx0           0660   media  media
+/dev/rpmsg-omx1           0660   media  media
+/dev/ion		  0666   media  media
