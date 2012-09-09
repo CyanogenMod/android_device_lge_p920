@@ -127,3 +127,4 @@
 /dev/rpmsg-omx0           0660   media  media
 /dev/rpmsg-omx1           0660   media  media
 /dev/ion		  0666   media  media
+/dev/tspdrv		  0666   system  system

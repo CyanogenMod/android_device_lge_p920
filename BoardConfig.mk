@@ -96,3 +96,4 @@ ENHANCED_DOMX := true
 
 TARGET_SPECIFIC_HEADER_PATH := device/lge/p920/include
 
+BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p920/vibrator.c
