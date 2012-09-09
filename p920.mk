@@ -26,7 +26,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/setup-recovery:system/bin/setup-recovery \
     $(LOCAL_PATH)/prebuilt/enable-tiwlink:system/bin/enable-tiwlink \
     $(LOCAL_PATH)/init.dummy.rc:root/init.p920.rc \
-    $(LOCAL_PATH)/init.cosmo.rc:root/init.rc \
+    $(LOCAL_PATH)/init.cosmo.rc:root/init.target.rc \
     $(LOCAL_PATH)/init.p920.usb.rc:root/init.p920.usb.rc \
     $(LOCAL_PATH)/ueventd.omap4430lgecosmopolitanboard.rc:root/ueventd.rc \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
