@@ -71,10 +71,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
-## Camera
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml
-
 $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_LOCALES += hdpi
@@ -111,7 +107,6 @@ PRODUCT_PACKAGES += \
 #
 PRODUCT_PACKAGES += \
     libtiutils \
-    libomxcameraadapter \
     libipcutils \
     libipc \
     libnotify \
