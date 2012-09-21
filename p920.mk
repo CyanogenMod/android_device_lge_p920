@@ -43,6 +43,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ipc_channels.config:system/etc/ipc_channels.config
 
+# Radio fixes
+FRAMEWORKS_BASE_SUBDIRS += ../../$(LOCAL_PATH)/ril/
+
 # Permission files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -141,7 +144,8 @@ PRODUCT_PACKAGES += \
     calibrator \
     hostap \
     libhostapdcli \
-    wifimac
+    wifimac \
+    lgcpversion
 
 ## WPAN
 PRODUCT_PACKAGES += uim-sysfs

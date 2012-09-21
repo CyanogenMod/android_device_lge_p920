@@ -348,16 +348,6 @@ on fs
     write /sys/devices/system/cpu/cpu0/cpufreq/boost_cpufreq 1
     write /sys/devices/system/cpu/cpufreq/hotplug/boost_timeout 3000000
 
-    mount ext4 /dev/block/mmcblk0p7 /system ro noatime data=ordered wait
-    mount ext4 /dev/block/mmcblk0p8 /data nosuid nodev noatime data=ordered wait
-    chown system system /data
-    chmod 0771 /data
-    mount ext4 /dev/block/mmcblk0p14 /misc nosuid nodev noatime data=ordered
-    chown system misc /misc
-    chmod 0771 /misc
-    mount ext4 /dev/block/mmcblk0p10 /cache nosuid nodev noatime data=ordered
-    chown system cache /cache
-    chmod 0770 /cache
     #mount ext3 /dev/block/mmcblk0p11 /lgdrm nosuid nodev noatime data=ordered
 
 
@@ -512,3 +502,7 @@ service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     user system
     group net_raw sdcard_rw system net_admin inet
 
+service lgcpversion /system/bin/lgcpversion
+    class late_start
+    user root
+    oneshot

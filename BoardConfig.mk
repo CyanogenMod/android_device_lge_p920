@@ -29,13 +29,13 @@ TARGET_KERNEL_SOURCE := kernel/lge/omap4-common
 #TARGET_PREBUILT_KERNEL := device/lge/p920/kernel
 
 KERNEL_WL12XX_MODULES:
-	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-"
+	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE)
 	-mv hardware/ti/wlan/mac80211/compat_wl12xx/compat/compat.ko $(KERNEL_MODULES_OUT)
 	-mv hardware/ti/wlan/mac80211/compat_wl12xx/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
 	-mv hardware/ti/wlan/mac80211/compat_wl12xx/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
 	-mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
 	-mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
-	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-" clean
+	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE) clean
 	-rm hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/version.h
 	-rm hardware/ti/wlan/mac80211/compat_wl12xx/include/linux/compat_autoconf.h
 

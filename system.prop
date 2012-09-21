@@ -19,6 +19,7 @@ ro.telephony.call_ring.delay=3000
 ro.telephony.call_ring.absent=true
 rild.libpath=/system/lib/lge-ril.so
 mobiledata.interfaces=rmnet0
+ro.telephony.ril_class=LGEInfineon
 
 ro.opengles.version=131072
 dalvik.vm.dexopt-data-only=1
@@ -33,10 +34,6 @@ ro.com.google.clientidbase.am=android-lge
 omap.audio.mic.main=AMic0
 omap.audio.mic.sub=AMic1
 omap.audio.power=PingPong
-
-## Add additional storage expansion
-ro.additionalmounts=/mnt/emmc
-ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
 
 ## CM toggle for TI Hotspot
 wifi.hotspot.ti=true
