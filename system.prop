@@ -37,3 +37,9 @@ omap.audio.power=PingPong
 
 ## CM toggle for TI Hotspot
 wifi.hotspot.ti=true
+
+persist.sys.usb.config=mtp,adb
+
+## Limit activities
+sys.mem.max_hidden_apps=5
+
