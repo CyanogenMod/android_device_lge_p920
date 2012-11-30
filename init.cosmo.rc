@@ -337,6 +337,12 @@ loglevel 3
     chmod 0644 /dev/xt_qtaguid
 
 on fs
+    mount_all ./fstab.cosmo
+
+    ## The sensor blobs use this for calibration
+    mkdir /log
+    symlink /data/misc /log/misc
+
 # Boost the CPU for 60 sec for boot optimization
     write /sys/devices/system/cpu/cpufreq/hotplug/boost_timeout 60000000
     write /sys/devices/system/cpu/cpu0/cpufreq/boost_cpufreq 1
@@ -457,8 +463,8 @@ service iprenew_wlan0 /system/bin/dhcpcd -n wlan0
     disabled
     oneshot
 
-service hostapd /system/bin/hostap -dd /data/misc/wifi/hostapd.conf
-    class main
+service hostapd_bin /system/bin/hostapd -d /data/misc/wifi/hostapd.conf
+    socket wpa_wlan1 dgram 660 wifi wifi
     disabled
     oneshot
 

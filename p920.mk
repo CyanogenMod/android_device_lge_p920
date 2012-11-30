@@ -18,8 +18,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.dummy.rc:root/init.p920.rc \
     $(LOCAL_PATH)/init.cosmo.rc:root/init.lgep920board.rc \
     $(LOCAL_PATH)/init.p920.usb.rc:root/init.p920.usb.rc \
-    $(LOCAL_PATH)/ueventd.omap4430lgecosmopolitanboard.rc:root/ueventd.rc \
-    $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
+    $(LOCAL_PATH)/ueventd.lgep920board.rc:root/ueventd.lgep920board.rc \
+    $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab \
+    $(LOCAL_PATH)/fstab.cosmo:root/fstab.cosmo
 
 ## Wifi
 PRODUCT_COPY_FILES += \
@@ -28,6 +29,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/RFMD_S_3.5.ini:system/etc/wifi/RFMD_S_3.5.ini \
     $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/configs/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
+    $(LOCAL_PATH)/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
     $(LOCAL_PATH)/configs/touch_dev.idc:system/usr/idc/touch_dev.idc \
     $(LOCAL_PATH)/configs/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
