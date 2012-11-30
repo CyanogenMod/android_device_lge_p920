@@ -141,18 +141,7 @@ PRODUCT_PACKAGES += \
     wifimac
 
 ## WPAN
-# This file lists the firmware, software that are specific to
-# WiLink connectivity chip on OMAPx platforms.
-
 PRODUCT_PACKAGES += uim-sysfs
-
-#copy firmware
-PRODUCT_COPY_FILES += \
-  system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
-
-#Temporary: bnep is disabled at the kernel, use a dummy bt network module
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/prebuilt/network.so:system/lib/bluez-plugin/network.so
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_p920
