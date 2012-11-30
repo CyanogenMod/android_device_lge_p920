@@ -9,16 +9,6 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/p920/overlay
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/bluetooth.ko:system/lib/modules/bluetooth.ko \
-    $(LOCAL_PATH)/prebuilt/btwilink.ko:system/lib/modules/btwilink.ko \
-    $(LOCAL_PATH)/prebuilt/cfg80211.ko:system/lib/modules/cfg80211.ko \
-    $(LOCAL_PATH)/prebuilt/compat.ko:system/lib/modules/compat.ko \
-    $(LOCAL_PATH)/prebuilt/mac80211.ko:system/lib/modules/mac80211.ko \
-    $(LOCAL_PATH)/prebuilt/rfcomm.ko:system/lib/modules/rfcomm.ko \
-    $(LOCAL_PATH)/prebuilt/wl12xx.ko:system/lib/modules/wl12xx.ko \
-    $(LOCAL_PATH)/prebuilt/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
-
-PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 ## Scripts and confs
@@ -26,7 +16,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/setup-recovery:system/bin/setup-recovery \
     $(LOCAL_PATH)/prebuilt/enable-tiwlink:system/bin/enable-tiwlink \
     $(LOCAL_PATH)/init.dummy.rc:root/init.p920.rc \
-    $(LOCAL_PATH)/init.cosmo.rc:root/init.target.rc \
+    $(LOCAL_PATH)/init.cosmo.rc:root/init.lgep920board.rc \
     $(LOCAL_PATH)/init.p920.usb.rc:root/init.p920.usb.rc \
     $(LOCAL_PATH)/ueventd.omap4430lgecosmopolitanboard.rc:root/ueventd.rc \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
@@ -49,11 +39,6 @@ PRODUCT_COPY_FILES += \
 # RIL stuffs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ipc_channels.config:system/etc/ipc_channels.config
-
-# SGX modules
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko \
-    $(LOCAL_PATH)/prebuilt/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko
 
 # Permission files
 PRODUCT_COPY_FILES += \

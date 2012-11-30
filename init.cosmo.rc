@@ -427,7 +427,7 @@ on boot
     mkdir /data/cache
     chmod 777 /data/cache
 
-service pvrsrvinit /system/bin/pvrsrvinit
+service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
     user root
     oneshot

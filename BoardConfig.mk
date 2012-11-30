@@ -23,11 +23,28 @@ BOARD_UBOOT_ENTRY := 0x80008000
 BOARD_UBOOT_LOAD := 0x80008000
 
 # Try to build the kernel
-TARGET_KERNEL_CONFIG := cyanogenmod_cosmo_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_p920_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/omap4-common
 # Keep this as a fallback
-TARGET_PREBUILT_KERNEL := device/lge/p920/kernel
+#TARGET_PREBUILT_KERNEL := device/lge/p920/kernel
 
-TARGET_KERNEL_MODULES := KERNEL_EXTERNAL_MODULES
+KERNEL_WL12XX_MODULES:
+	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-"
+	-mv hardware/ti/wlan/mac80211/compat_wl12xx/compat/compat.ko $(KERNEL_MODULES_OUT)
+	-mv hardware/ti/wlan/mac80211/compat_wl12xx/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
+	-mv hardware/ti/wlan/mac80211/compat_wl12xx/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
+	-mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
+	-mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
+	make -C hardware/ti/wlan/mac80211/compat_wl12xx/ KLIB_BUILD=$(KERNEL_OUT) ARCH="arm" CROSS_COMPILE="arm-eabi-" clean
+	-rm hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/version.h
+	-rm hardware/ti/wlan/mac80211/compat_wl12xx/include/linux/compat_autoconf.h
+
+KERNEL_SGX_MODULES:
+	make -C device/lge/p920/sgx-module/eurasia_km/eurasiacon/build/linux2/omap4430_android/ O=$(KERNEL_OUT) KERNELDIR=$(ANDROID_BUILD_TOP)/$(KERNEL_SRC) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE) TARGET_PRODUCT="blaze_tablet" BUILD=release TARGET_SGX=540 PLATFORM_VERSION=4.0 
+	mkdir -p $(TARGET_OUT)/modules/
+	mv $(OUT)/target/*sgx540_120.ko $(TARGET_OUT)/modules/
+
+TARGET_KERNEL_MODULES := KERNEL_SGX_MODULES KERNEL_WL12XX_MODULES
 
 ## Ignore --wipe_data sent by the bootloader
 BOARD_RECOVERY_ALWAYS_WIPES := true
@@ -94,8 +111,8 @@ USE_OPENGL_RENDERER := true
 BOARD_CUSTOM_BOOTIMG_MK := device/lge/p920/uboot-bootimg.mk
 ENHANCED_DOMX := true
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/p920/include
 
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p920/vibrator.c
 
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB
+TARGET_SPECIFIC_HEADER_PATH := device/lge/p920/include/
