@@ -10,7 +10,6 @@ lib/libacousticengine.so
 lib/hw/audio.primary.omap4.so
 lib/hw/gralloc.omap4.so
 lib/hw/lights.omap4.so
-lib/hw/audio_policy.default.so
 lib/hw/gps.omap4.so
 lib/hw/sensors.omap4.so
 lib/hw/camera.omap4.so
