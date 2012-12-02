@@ -506,3 +506,9 @@ service lgcpversion /system/bin/lgcpversion
     class late_start
     user root
     oneshot
+
+service charger /charger
+    class charger
+    user root
+    group root
+    oneshot

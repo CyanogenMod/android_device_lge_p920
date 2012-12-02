@@ -147,6 +147,11 @@ PRODUCT_PACKAGES += \
     wifimac \
     lgcpversion
 
+# Charger mode
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
+
 ## WPAN
 PRODUCT_PACKAGES += uim-sysfs
 
