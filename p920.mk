@@ -15,6 +15,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/setup-recovery:system/bin/setup-recovery \
     $(LOCAL_PATH)/prebuilt/enable-tiwlink:system/bin/enable-tiwlink \
+    $(LOCAL_PATH)/prebuilt/lgcpversion:system/bin/lgcpversion \
     $(LOCAL_PATH)/init.dummy.rc:root/init.p920.rc \
     $(LOCAL_PATH)/init.cosmo.rc:root/init.lgep920board.rc \
     $(LOCAL_PATH)/init.p920.usb.rc:root/init.p920.usb.rc \
@@ -144,8 +145,7 @@ PRODUCT_PACKAGES += \
     calibrator \
     hostap \
     libhostapdcli \
-    wifimac \
-    lgcpversion
+    wifimac
 
 # Charger mode
 PRODUCT_PACKAGES += \
