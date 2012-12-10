@@ -1,7 +1,7 @@
 import init.p920.usb.rc
 
 on early-init
-    mkdir /storage 0775 root system
+    mkdir /storage 0050 system sdcard_r
     mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
     symlink /storage/sdcard0 /sdcard
