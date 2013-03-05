@@ -38,7 +38,7 @@
              android:removable="true"
              android:primary="false"
              android:emulated="false"/>
-    <storage android:mountPoint="/storage/sdcard0"
+    <storage android:mountPoint="/storage/sdcard"
              android:storageDescription="@string/storage_internal"
              android:removable="false"
              android:primary="true"
