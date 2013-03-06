@@ -4,8 +4,9 @@ on early-init
     mkdir /storage 0775 root system
     mkdir /mnt/shell/sdcard 0700 shell shell
     mkdir /storage/sdcard 0555 root root
+    mkdir /storage/sdcard1 0555 root root
 
-    export EXTERNAL_STORAGE /storage/sdcard
+    export EXTERNAL_STORAGE /storage/sdcard1
 
     # Support legacy paths
     symlink /storage/sdcard /sdcard
