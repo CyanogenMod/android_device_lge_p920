@@ -13,6 +13,7 @@ PRODUCT_COPY_FILES += \
 
 ## Scripts and confs
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/66swap:system/etc/init.d/66swap \
     $(LOCAL_PATH)/prebuilt/setup-recovery:system/bin/setup-recovery \
     $(LOCAL_PATH)/prebuilt/enable-tiwlink:system/bin/enable-tiwlink \
     $(LOCAL_PATH)/prebuilt/lgcpversion:system/bin/lgcpversion \
