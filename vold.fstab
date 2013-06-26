@@ -16,6 +16,6 @@
 # Mounts the first usable partition of the specified device
 #dev_mount sdcard /mnt/sdcard auto /devices/platform/mmci-omap-hs.0/mmc_host/mmc1
 dev_mount sdcard /storage/sdcard1 auto /devices/platform/omap/omap_hsmmc.0/mmc_host
-dev_mount emmc /storage/sdcard0 15 /devices/platform/omap/omap_hsmmc.1/mmc_host
+dev_mount emmc /storage/sdcard 16 /devices/platform/omap/omap_hsmmc.1/mmc_host
 #dev_mount extsdcard /mnt/sdcard/_ExternalSD auto /devices/platform/mmci-omap-hs.0/mmc_host/mmc1
 

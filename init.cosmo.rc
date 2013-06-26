@@ -1,18 +1,22 @@
 import init.p920.usb.rc
 
 on early-init
-    mkdir /storage 0050 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
-    symlink /storage/sdcard0 /sdcard
+    mkdir /storage 0775 root system
+    mkdir /mnt/shell/sdcard 0700 shell shell
+    mkdir /storage/sdcard 0555 root root
+    mkdir /storage/sdcard1 0555 root root
 
+    export EXTERNAL_STORAGE /storage/sdcard1
+
+    # Support legacy paths
+    symlink /storage/sdcard /sdcard
+    symlink /storage/sdcard /mnt/sdcard
+    symlink /storage/sdcard /storage/sdcard0
 on init
 
 sysclktz 0
 
 loglevel 3
-
-    export EXTERNAL_STORAGE /storage/sdcard0
 
     wait /dev/block/mmcblk0p2
 

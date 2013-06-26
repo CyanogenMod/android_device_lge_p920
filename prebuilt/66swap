@@ -1,0 +1,3 @@
+#!/system/bin/sh
+mkswap /dev/block/mmcblk0p17
+swapon /dev/block/mmcblk0p17
